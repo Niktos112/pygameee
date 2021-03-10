@@ -61,6 +61,19 @@ while running:
             else:
                 if balls:
                     del balls[0]
+
+    those_who_wont_survive = []
+    for i in range(len(balls)):
+        for j in range(len(balls)):
+            if i != j:
+                if int((balls[i].pos[0] - balls[j].pos[0])) ** 2 + int((balls[i].pos[1] - balls[j].pos[1])) ** 2 <= \
+                        (radius * 2) ** 2:
+                    if i not in those_who_wont_survive and j not in those_who_wont_survive:
+                        those_who_wont_survive.append(i)
+                        those_who_wont_survive.append(j)
+    for i in those_who_wont_survive[::-1]:
+        del balls[i]
+
     for ball in balls:
         ball.xmove()
         ball.ymove()
